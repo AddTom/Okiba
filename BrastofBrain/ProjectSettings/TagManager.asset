@@ -1,0 +1,74 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!78 &1
+TagManager:
+  serializedVersion: 2
+  tags:
+  - DamageObject
+  - isGround
+  - target
+  - Warp
+  - Wall
+  - Block
+  - enemy
+  - coin
+  - attack
+  - Caunter
+  layers:
+  - Default
+  - TransparentFX
+  - Ignore Raycast
+  - 
+  - Water
+  - UI
+  - 
+  - 
+  - isGround
+  - Player
+  - "Ene\uFF4Dy"
+  - target
+  - PlayerDamag
+  - Magic
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  m_SortingLayers:
+  - name: Back
+    uniqueID: 1063532789
+    locked: 0
+  - name: Default
+    uniqueID: 0
+    locked: 0
+  - name: BG
+    uniqueID: 1446546411
+    locked: 0
+  - name: Block
+    uniqueID: 2494971979
+    locked: 0
+  - name: Coin
+    uniqueID: 3534837493
+    locked: 0
+  - name: Character
+    uniqueID: 3861965691
+    locked: 0
+  - name: UI
+    uniqueID: 4086813705
+    locked: 0
+  - name: Player
+    uniqueID: 25394241
+    locked: 0
