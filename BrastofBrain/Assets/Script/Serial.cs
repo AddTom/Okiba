@@ -4,31 +4,26 @@ using UnityEngine;
 
 public class Serial : MonoBehaviour
 {
-    public SerialHandler serialHandler;
-    private float time;
+    public SerialHandler serialHandler; // シリアル通信を処理するためのハンドラ
 
-  void Start()
+    private float time; // 時間を保持する変数
+
+
+    // Update is called once per frame
+    void Update()
     {
-    
-    }
-    //受信した信号(message)に対する処理
-       void Update() 
-    {
-       
-            serialHandler.Write(testkansu.flag);
-            time=0;
-            Debug.Log(testkansu.flag);
+        // testkansu.flag の値をシリアル通信で送信
+        serialHandler.Write(testkansu.flag);
         
-
-        
-
-
+        // 時間をリセットし、testkansu.flag の値をデバッグログに出力
+        time = 0;
+        Debug.Log(testkansu.flag);
     }
 
-    
-     private void OnApplicationQuit()
+    // アプリケーションが終了する際に呼び出される
+    private void OnApplicationQuit()
     {
-      //serialHandler.Close();
+        // シリアル通信をオフ
+        // serialHandler.Close();
     }
-    
 }

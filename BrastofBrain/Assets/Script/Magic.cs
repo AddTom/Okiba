@@ -8,21 +8,22 @@ using UnityEngine;
 
 public class Magic : ScriptableObject
 {
-    public int id;
-    public string name;
-    public string info;
-    public Type type;
-    public Sprite sprite;
-    public float forse;
-    public float lostmp;
-    public float speed;
-    public GameObject Hantei;
+    public int id;// 魔法のID
+  public string name; // 魔法の名前
+    public string info; // 魔法の説明
+    public Type type; // 魔法のタイプ
+    public Sprite sprite; // 魔法のアイコン画像
+    public float forse; // 魔法の威力
+    public float lostmp; // 魔法を使用するのに必要なMPの消費量
+    public float speed; // 魔法の速度
+    public GameObject Hantei; // 魔法の当たり判定を表すゲームオブジェクト
 
-
+    // 魔法の種類を表す列挙型
     public enum Type{
         Fire,
     }
 
+    // コンストラクター：Magicクラスのコピーを生成する際に使用
     public Magic(Magic magic){
         this.type=magic.type;
         this.info=magic.info;

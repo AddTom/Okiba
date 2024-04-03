@@ -11,29 +11,7 @@ public class Rota : MonoBehaviour
     public int comID;
 
      public  void getRotate(float rot){
-          playerRotate=rot;
+          playerRotate=rot; //プレイヤーのrotatを保存する
      }
 
-
-   
-     
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-           
-        
-    }
-
-     private void OnTriggerEnter2D(Collider2D other) {
-        
-          
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

@@ -8,14 +8,11 @@ using System.Threading; //スレッド通信
 
 public class SerialHandler : MonoBehaviour
 {
+    // シリアルデータを受信したときに呼び出されるイベントハンドラ
     public delegate void SerialDataReceivedEventHandler(string message);
     public event SerialDataReceivedEventHandler OnDataReceived=delegate{};
 
-    //ポート名
-    //例
-    //Linuxでは/dev/ttyUSB0
-    //windowsではCOM1
-    //Macでは/dev/tty.usbmodem1421など
+     // シリアルポートの名前とボーレート
     public string portName = "COM6";
     public int baudRate    = 9600;
     string Conectports = string.Join("", SerialPort.GetPortNames());
@@ -29,6 +26,7 @@ public class SerialHandler : MonoBehaviour
 
     void Awake()
     {
+        // 利用可能なポートを検索し、指定されたポートを開く
         if(Conectports.Contains(portName))
             OpenB();
         else if(Conectports.Contains("COM3"))
@@ -38,6 +36,7 @@ public class SerialHandler : MonoBehaviour
 
     void Update()
     {
+         // 新しいメッセージが受信されたときにイベントを発生させる
         if (isNewMessageReceived_) {
             OnDataReceived(message_);
         }
@@ -48,12 +47,11 @@ public class SerialHandler : MonoBehaviour
     {
         Close();
     }
-
+    // 指定されたプロペラ1のポートを開く
     private void Open()
     {
         serialPort_ = new SerialPort("COM3", baudRate, Parity.None, 8, StopBits.One);
-         //または
-         //serialPort_ = new SerialPort(portName, baudRate);
+       
         serialPort_.ReadTimeout = 20;
         serialPort_.NewLine = "\n";
 
@@ -67,11 +65,11 @@ public class SerialHandler : MonoBehaviour
         thread_.Start();
     }
 
+    // 指定されたプロペラ2のポートを開く
      private void OpenB()
     {
         serialPort_ = new SerialPort(portName, baudRate, Parity.None, 8, StopBits.One);
-         //または
-         //serialPort_ = new SerialPort(portName, baudRate);
+     
         serialPort_.ReadTimeout = 20;
         serialPort_.NewLine = "\n";
 
@@ -85,6 +83,7 @@ public class SerialHandler : MonoBehaviour
         thread_.Start();
     }
 
+    //ポートを閉じる
     private void Close()
     {
         isNewMessageReceived_ = false;
@@ -100,6 +99,7 @@ public class SerialHandler : MonoBehaviour
         }
     }
 
+ // ポートからのデータを読み取る
     private void Read()
     {
         while (isRunning_ && serialPort_ != null && serialPort_.IsOpen) {
@@ -113,6 +113,7 @@ public class SerialHandler : MonoBehaviour
         }
     }
 
+// ポートにデータを書き込む
     public void Write(string message)
     {
         try {

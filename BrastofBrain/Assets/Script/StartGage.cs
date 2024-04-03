@@ -4,27 +4,24 @@ using UnityEngine;
 
 public class StartGage : MonoBehaviour
 {
-    public GameObject CaunterGage= default;
-    private bool flag=true;
-    public static bool flagc=false;
-
-
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    // 集中ゲージ表示オブジェクト
+    public GameObject CaunterGage = default;
+    
+    // ゲージ表示フラグ
+    private bool flag = true;
+    
+    // ゲージ表示フラグの更新フラグ
+    public static bool flagc = false;
 
     // Update is called once per frame
     void Update()
     {
-        if(CASlider.Gage!=null&&flag==true&&flagc==true){
-            CaunterGage.SetActive(true);
-            flag=false;
-            flagc=false;
-
-
+        // ゲージが設定され、まだ表示されていない場合に表示する
+        if (CASlider.Gage != null && flag == true && flagc == true)
+        {
+            CaunterGage.SetActive(true); // ゲージを表示する
+            flag = false; // ゲージが表示されたことを記録する
+            flagc = false; // ゲージ表示更新フラグをリセットする
         }
     }
 }

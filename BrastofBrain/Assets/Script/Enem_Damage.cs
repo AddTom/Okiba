@@ -4,36 +4,21 @@ using UnityEngine;
 
 public class Enem_Damage : MonoBehaviour
 {
-    //[SerializeField] private EnemyDataBase enemyDataBase;//データベース呼び出し
-    Enemy enemy;        //保存用
-    public float life;
-    private float pow1=45;
-    
-    // Start is called before the first frame update
-    void Start()
+    Enemy enemy;        // 保存用のEnemyクラスのインスタンス
+    public float life;  // 敵キャラクターの体力
+    private float pow1 = 45; // ダメージの基礎値
+
+    // ダメージを受ける処理
+    public void Damage(Collision2D other, float pow)
     {
-        //enemy=Enemy.besic1;
-        
+        // ダメージを受けるオブジェクトがIDdamageインターフェースを持っているかをチェック
+        IDdamage damageable = other.gameObject.GetComponent<IDdamage>();
+        if (damageable != null)
+        {
+            // プレイヤーのダメージ計算式を取得し、ダメージを与える
+            damageable.Damagea(pow);
+            // 敵キャラクターを破壊
+            Destroy(this.gameObject);
+        }
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-     public void Damage(Collision2D other,float pow)
-    {
-          
-          IDdamage damageable = other.gameObject.GetComponent<IDdamage>();//プレイヤーのダメージ計算式を取得
-          if(damageable != null)
-          {
-               damageable.Damagea(pow);
-                Destroy (this.gameObject);
-               
-          }    
-          
-
-    }
-
 }

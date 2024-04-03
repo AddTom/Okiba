@@ -4,28 +4,20 @@ using UnityEngine;
 
 public class EnemyMove1 : MonoBehaviour
 {
-
-    private Rigidbody2D m_rigidbody2D;//
-     public Transform target; // 追いかける対象のTransform
-   public float moveSpeed = 5f;
-     public float playerRotate;
-    
-    private float pow1=45;
-   
-    
+    private Rigidbody2D m_rigidbody2D; // Rigidbody2Dコンポーネントの参照
+    public Transform target; // プレイヤーのTransform
+    public float moveSpeed = 5f; // 移動速度
 
     // Start is called before the first frame update
     void Start()
     {
-       
-         target = GameObject.Find("Player").transform;//Palyerのtransformを保存
-        
+        //プレイヤーのTransformを取得
+        target = GameObject.Find("Player").transform;
     }
 
     // Update is called once per frame
     void Update()
     {
-         
         if (target != null)
         {
             // 目標の方向を計算
@@ -34,14 +26,6 @@ public class EnemyMove1 : MonoBehaviour
 
             // 目標の方向に移動
             transform.Translate(direction * moveSpeed * Time.deltaTime);
-            
-            
-
-         }
-          
-      }
-
-    
-
-     
+        }
+    }
 }

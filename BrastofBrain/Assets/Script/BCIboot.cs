@@ -11,7 +11,7 @@ using UnityEngine.UI;
 
 public class BCIboot : MonoBehaviour
 {
-    public static bool flag=true;
+    public static bool flag=true;// OpenBCI_GUIの起動状態を示すフラグ
 
     private static readonly string FoldePath = Application.streamingAssetsPath + "/OpenBCI_GUI";
     private static readonly string ExePath = FoldePath + "/OpenBCI_GUI.exe";//実行ファイル
@@ -65,16 +65,13 @@ public class BCIboot : MonoBehaviour
 //        DisposeProcess();
 //     }
 
+    // OpenBCI_GUIの標準出力を取得し、デバッグログに出力する
     private static void OnStandardOut(object sender, DataReceivedEventArgs e)
         => UnityEngine.Debug.Log($"外部プロセスの標準出力 : {e.Data}");
     
+    // プロセスを終了する
     private void DisposeProcess(object sender, EventArgs e)
         => DisposeProcess();
-
-
-    
-
-    
 
     private void DisposeProcess()
     {

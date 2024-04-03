@@ -4,24 +4,21 @@ using UnityEngine;
 
 public class Enemy_move3 : MonoBehaviour
 {
-    public Transform player;
-    public float moveSpeed = 3f;
-    public float attackRange = 5f;
-    public GameObject projectilePrefab;
-    public float projectileSpeed = 10f;
-    public float attackCooldown = 1f;
+    public Transform player;            // プレイヤーの位置情報を保持する変数
+    public float moveSpeed = 3f;        // 移動速度
+    public float attackRange = 5f;      // 攻撃範囲
+    public GameObject projectilePrefab; // 攻撃時に発射する弾のプレハブ
+    public float projectileSpeed = 10f; // 弾の速度
+    public float attackCooldown = 1f;   // 攻撃のクールタイム
 
-    private float lastAttackTime;
+    private float lastAttackTime;       // 最後に攻撃した時間
 
- void Start()
+    void Start()
     {
-
-         player = GameObject.Find("Player").transform;//Palyerのtransformを保存
-         
-        
+        player = GameObject.Find("Player").transform; // プレイヤーの位置情報を取得
     }
 
-      void Update()
+    void Update()
     {
         float distanceToPlayer = Vector2.Distance(transform.position, player.position);
 
@@ -39,32 +36,22 @@ public class Enemy_move3 : MonoBehaviour
 
     void MoveTowardsPlayer()
     {
-        // // プレイヤーの方向を向く
-        // Vector3 direction = player.position - transform.position;
-        // float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-        // transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+        // プレイヤーの方向を向く
+        Vector3 direction = player.position - transform.position;
+        direction.Normalize(); // ベクトルを正規化
 
-         Vector3 direction = player.position - transform.position;
-            direction.Normalize(); // ベクトルを正規化
-
-            // 目標の方向に移動
-            transform.Translate(direction * moveSpeed * Time.deltaTime);
-            
-    
+        // 目標の方向に移動
+        transform.Translate(direction * moveSpeed * Time.deltaTime);
     }
 
     bool CanAttack()
     {
+        // 前回の攻撃からクールタイムを経過しているかを判定
         return (Time.time - lastAttackTime) > attackCooldown;
     }
 
     void Attack()
     {
-        // プレイヤーの方向を向く
-        // Vector3 direction = player.position - transform.position;
-        // float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-        // transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
-
         // 攻撃を発射
         GameObject projectile = Instantiate(projectilePrefab, transform.position, transform.rotation);
         Rigidbody2D projectileRb = projectile.GetComponent<Rigidbody2D>();
@@ -74,11 +61,12 @@ public class Enemy_move3 : MonoBehaviour
         lastAttackTime = Time.time;
     }
 
-      void OnCollisionEnter2D(Collision2D collision)
+    void OnCollisionEnter2D(Collision2D collision)
     {
+        // プレイヤーと衝突した場合、自身を破壊する
         if (collision.gameObject.CompareTag("Player"))
         {
-          Destroy (this.gameObject);
+            Destroy(this.gameObject);
         }
     }
 }

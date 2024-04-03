@@ -9,7 +9,8 @@ using UnityEngine.UI;
 
 public class GraphBoot : MonoBehaviour
 {
-    public static bool flag=true;
+    public static bool flag=true;// OpenBCI_GUIの起動状態を示すフラグ
+
 
     private static readonly string FoldePath = Application.streamingAssetsPath + "/EEG_class/dist";
     private static readonly string ExePath = FoldePath + "/plot_EEG.exe";//実行ファイル
@@ -44,36 +45,15 @@ public class GraphBoot : MonoBehaviour
         }
 
     
-  private void Awake()
-  {
-   
-
-  }
-//    void SceneLoaded (Scene nextScene, LoadSceneMode mode) {
-//         UnityEngine.Debug.Log(nextScene.name);
-//         UnityEngine.Debug.Log(mode);
-//         DisposeProcess();
-//         BCIexe.Close();
-
-//     }
-
-//      private void OnApplicationQuit()
-//     {
-      
-//        DisposeProcess();
-//     }
-
+     // OpenBCI_GUIの標準出力を取得し、デバッグログに出力する
     private static void OnStandardOut(object sender, DataReceivedEventArgs e)
         => UnityEngine.Debug.Log($"外部プロセスの標準出力 : {e.Data}");
     
     private void DisposeProcess(object sender, EventArgs e)
         => DisposeProcess();
 
-
     
-
-    
-
+    // プロセスを終了する
     private void DisposeProcess()
     {
         if (Graphexe == null || Graphexe.HasExited) return;
@@ -84,4 +64,3 @@ public class GraphBoot : MonoBehaviour
         Graphexe = null;
     }
 }
-

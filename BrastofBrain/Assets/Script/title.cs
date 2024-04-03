@@ -5,33 +5,21 @@ using UnityEngine.SceneManagement;
 using Photon.Pun;
 using UnityEngine.InputSystem;
 
-public class title : MonoBehaviour
+public class TitleController : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
     // Update is called once per frame
     void Update()
     {
-         if(Input.GetKeyDown ("joystick button 2")&&Gamepad.current == null){
-            
-           SceneManager.LoadScene("Title");
-        }
-
-        if(Input.GetKey(KeyCode.E)){
-            
-           SceneManager.LoadScene("Title");
-
-        }
-        if (Gamepad.current == null) 
-            return;            
-
-        if (Gamepad.current.aButton.wasPressedThisFrame) {
+        // ゲームパッドの2番目のボタン（Bボタン）が押されたとき、またはEキーが押されたときにタイトルシーンに戻る
+        if (Input.GetKeyDown("joystick button 2") && Gamepad.current == null || Input.GetKey(KeyCode.E))
+        {
             SceneManager.LoadScene("Title");
+        }
 
+        // ゲームパッドのAボタンが押されたときにタイトルシーンに戻る
+        if (Gamepad.current != null && Gamepad.current.aButton.wasPressedThisFrame)
+        {
+            SceneManager.LoadScene("Title");
         }
     }
 }
